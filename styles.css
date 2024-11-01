@@ -1,0 +1,144 @@
+*, *::before,*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0 solid transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+:root{
+  --body-color: #6c757d;
+  --accent-color: #007bff;
+  --special-color: #f7a1f0;
+  --screen-color: #6fab7f;
+  --operation-color: #cf6af7;
+
+  --font-family: "Roboto", Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1;
+  text-rendering: optimizeSpeed;
+  font-family: var(--font-family);
+}
+
+.calculator{
+  position: absolute;
+  height: 60vh;
+  width: 50vh;
+  left: 50%;
+  top: 50%;
+  margin-left: -25vh;
+  margin-top: -30vh;
+  background-color: var(--body-color);
+  font-size: 30px;
+}
+
+.calculator-screen {
+  height: 10vh;
+  width: 93%;
+  margin: 0.5em auto;
+  display: flex;
+  padding: 0 1rem;
+  font-size: 2rem;
+  color: var(--special-color);
+  background-color: var(--screen-color)
+}
+
+.calculator-btns {
+  height: 78%;
+  width: 100%;
+  display: grid;
+  grid-template-areas: 
+  "ac del percent div"
+  "seven eight nine mult"
+  "four five six minus"
+  "one two three addition"
+  "eq eq point cero";
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0.5em;
+  padding: 0.8em;
+  padding-top: 0em;
+}
+
+.calculator-btn {
+  background-color: #007bff;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#one {
+  grid-area: one;
+}
+#two {
+  grid-area: two;
+}
+#three {
+  grid-area: three;
+}
+#four {
+  grid-area: four;
+}
+#five {
+  grid-area: five;
+}
+#six {
+  grid-area: six;
+}
+#seven {
+  grid-area: seven;
+}
+#eight {
+  grid-area: eight;
+}
+#nine {
+  grid-area: nine;
+}
+#zero {
+  grid-area: cero;
+}
+#delete {
+  grid-area: del;
+}
+#addition {
+  grid-area: addition;
+  background-color: var(--operation-color);
+}
+#minus {
+  grid-area: minus;
+  background-color: var(--operation-color);
+}
+#multiply {
+  grid-area: mult;
+  background-color: var(--operation-color);
+}
+#divide {
+  grid-area: div;
+  background-color: var(--operation-color);
+}
+#percent {
+  grid-area: percent;
+}
+#point {
+  grid-area: point;
+}
+#equals {
+  grid-area: eq;
+  background-color: var(--special-color);
+}
+#ac {
+  grid-area: ac;
+  background-color: var(--special-color);
+}
