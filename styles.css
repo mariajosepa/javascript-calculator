@@ -17,9 +17,11 @@ html {
   --accent-color: #007bff;
   --special-color: #f7a1f0;
   --screen-color: #6fab7f;
+  --screen-text-color: #8a9099;
   --operation-color: #cf6af7;
 
   --font-family: "Roboto", Arial, sans-serif;
+  --font-family-secondary: "Orbitron", sans-serif;
 }
 
 body {
@@ -29,7 +31,7 @@ body {
   font-family: var(--font-family);
 }
 
-.calculator{
+#calculator{
   position: absolute;
   height: 60vh;
   width: 50vh;
@@ -41,15 +43,20 @@ body {
   font-size: 30px;
 }
 
-.calculator-screen {
+#calculator-screen {
   height: 10vh;
   width: 93%;
   margin: 0.5em auto;
   display: flex;
-  padding: 0 1rem;
+  padding: 0 0.6rem;
   font-size: 2rem;
   color: var(--special-color);
-  background-color: var(--screen-color)
+  background-color: var(--screen-color);
+  font-family: var(--font-family-secondary);
+  color: var(--screen-text-color);
+  line-height: 10vh;
+  text-align: right;
+  flex-direction: row-reverse;
 }
 
 .calculator-btns {
@@ -77,6 +84,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 #one {
