@@ -21,7 +21,7 @@ html {
   --operation-color: #cf6af7;
 
   --font-family: "Roboto", Arial, sans-serif;
-  --font-family-secondary: "Orbitron", sans-serif;
+  --font-family-secondary: "Space Mono", monospace;
 }
 
 body {
@@ -33,14 +33,15 @@ body {
 
 #calculator{
   position: absolute;
-  height: 60vh;
+  height: 65vh;
   width: 50vh;
   left: 50%;
   top: 50%;
   margin-left: -25vh;
-  margin-top: -30vh;
+  margin-top: -32.5vh;
   background-color: var(--body-color);
   font-size: 30px;
+  border-radius: 1rem;
 }
 
 #calculator-screen {
@@ -49,7 +50,7 @@ body {
   margin: 0.5em auto;
   display: flex;
   padding: 0 0.6rem;
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--special-color);
   background-color: var(--screen-color);
   font-family: var(--font-family-secondary);
@@ -68,7 +69,7 @@ body {
   "seven eight nine mult"
   "four five six minus"
   "one two three addition"
-  "eq eq point cero";
+  "point cero eq eq";
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 0.5em;
