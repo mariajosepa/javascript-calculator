@@ -27,6 +27,24 @@ const memSave = () => {
     mem = operation(lastOperator,mem,parseFloat(currentNumber));
   }
 }
+
+const formatAnswer = (ans) => {
+
+  const absAns = Math.abs(ans); // Get the absolute value for checks
+
+  // Determine when to use exponential notation
+  if (absAns >= 1e14 || (absAns > 0 && absAns < 1e-14)) {
+    // Use exponential notation with up to 10 digits for mantissa
+    ans = ans.toExponential(9);
+  } 
+  // Ensure the result doesn't exceed 15 characters
+  if (ans.toString().length > 14) {
+    ans = ans.toString().slice(0, 14);
+  }
+
+  return ans.toString();
+};
+
 const operation = (op,num1,num2) => {
   let ans = null;
   switch (op) {
@@ -56,7 +74,7 @@ const operator = (op) => {
   }
    // we display what is in memory after consecutive operations
    if (opCount > 1){
-    calcScreen.textContent = mem.toString();
+    calcScreen.textContent = formatAnswer(mem);
   }
 
   lastOperator = op;
@@ -68,21 +86,20 @@ const clear = () => {
   calcScreen.textContent = "0";
   mem = null;
 }
-const displayAnswer = (ans) => {
-  calcScreen.textContent = ans;
-}
 const equals = () => {
   if (currentNumber !== ""){
     memSave();
-    calcScreen.textContent = mem.toString();
-    currentNumber = "";
-    lastOperator = "";
-    opCount = 0;
   }
+  //debemos formatear la respuesta
+  calcScreen.textContent = formatAnswer(mem);
+  currentNumber = "";
+  lastOperator = "";
+  opCount = 0;
+  
 }
 const typeChar = (char) => {
 
-  if (currentNumber.length < 15){
+  if (currentNumber.length < 14){
 
     if (char === "point"){
       if (!currentNumber.includes(".")){
@@ -98,8 +115,22 @@ const typeChar = (char) => {
 
     calcScreen.textContent = currentNumber;
   }
+}
+
+const deleteChar = () => {
+
+  if (currentNumber.length === 1){
+    currentNumber = "";
+    calcScreen.textContent = "0";
+  }
+
+  else if (currentNumber !== ""){
+    currentNumber = currentNumber.slice(0,-1);
+    calcScreen.textContent = currentNumber;
+  }
   
 }
+
 keypad.addEventListener("click", function(event) {
   var target = event.target;
 
@@ -114,5 +145,8 @@ keypad.addEventListener("click", function(event) {
   }
   else if(target.id === "equals"){
     equals();
+  }
+  else if(target.id === "delete"){
+    deleteChar();
   }
 });
