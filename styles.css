@@ -33,12 +33,12 @@ body {
 
 #calculator{
   position: absolute;
-  height: 65vh;
+  height: 68vh;
   width: 50vh;
   left: 50%;
   top: 50%;
   margin-left: -25vh;
-  margin-top: -32.5vh;
+  margin-top: -34vh;
   background-color: var(--body-color);
   font-size: 30px;
   border-radius: 1rem;
@@ -47,7 +47,7 @@ body {
 #calculator-screen {
   height: 10vh;
   width: 93%;
-  margin: 0.5em auto;
+  margin: 0.4em auto;
   display: flex;
   padding: 0 0.6rem;
   font-size: 3rem;
@@ -58,6 +58,7 @@ body {
   line-height: 10vh;
   text-align: right;
   flex-direction: row-reverse;
+  border-radius: 0.2em;
 }
 
 .calculator-btns {
@@ -73,7 +74,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 0.5em;
-  padding: 0.8em;
+  padding: 0.6em;
   padding-top: 0em;
 }
 
