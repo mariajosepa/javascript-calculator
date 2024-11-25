@@ -1,6 +1,6 @@
 keypad = document.querySelector(".calculator-btns");
 calcScreen = document.querySelector("#calculator-screen");
-let currentNumber = "";
+let currentNumber = "0";
 let lastOperator = "";
 let opCount = 0;
 let mem = null;
@@ -17,9 +17,8 @@ const numberDictionary = {
     eight: 8,
     nine: 9,
     point: ".",
-    minus: "-",
   }
-//we need to know if we have a number in memory, and if so, we need to perform the operation with the stored number in mind
+//know if we have a number in memory, and if so, we need to perform the operation with the stored number in mind
 const memSave = () => {
 
   if (!isNaN(parseFloat(currentNumber)))
@@ -41,6 +40,7 @@ const memSave = () => {
   }
   
 }
+//format the answer to fit the screen
 const formatAnswer = (ans) => {
 
   const absAns = Math.abs(ans); // Get the absolute value for checks
@@ -50,8 +50,14 @@ const formatAnswer = (ans) => {
     // Use exponential notation with up to 10 digits for mantissa
     ans = ans.toExponential(10);
   }
-
+//missing case when number exceeds 10 digits but has no decimal point or e
   if (ans.toString().length > 10){
+
+    console.log("length exceeded");
+
+    if (!ans.toString().includes("e") && !ans.toString().includes(".")){
+      ans = ans.toExponential(10);
+    }
 
     if (ans.toString().includes("e")){
       let [int,decimal] = ans.toString().split(".");
@@ -71,6 +77,7 @@ const formatAnswer = (ans) => {
   return ans.toString();
   
 }
+//perform an operation
 const operation = (op,num1,num2) => {
   let ans = null;
   switch (op) {
@@ -89,6 +96,7 @@ const operation = (op,num1,num2) => {
   }
   return ans;
 }
+//know what operation we are performing and how it affects the memory and the screen
 const operator = (op) => {
 
   opCount += 1;
@@ -105,13 +113,15 @@ const operator = (op) => {
     }
   lastOperator = op;
 }
+//clear the screen and the memory
 const clear = () => {
-  currentNumber = "";
+  currentNumber = "0";
   lastOperator = "";
   opCount = 0;
   calcScreen.textContent = "0";
   mem = null;
 }
+//display the answer
 const equals = () => {
   
   memSave();
@@ -127,6 +137,7 @@ const equals = () => {
   lastOperator = "";
   opCount = 0;  
 }
+//type a number or a decimal point
 const typeChar = (char) => {
 
   if (currentNumber.length < 10){
@@ -138,27 +149,21 @@ const typeChar = (char) => {
           {
             currentNumber += "0";
           }
-        currentNumber += numberDictionary[char].toString();
-        calcScreen.textContent = currentNumber;
-      }
-    }else if(char === "minus"){
-      
-      if (!currentNumber.includes("-") && currentNumber === "")
-        {
-          currentNumber += numberDictionary[char].toString();
-          calcScreen.textContent = currentNumber;
-      }else{
-        calcScreen.textContent = currentNumber;
-        operator(char);
+        currentNumber += numberDictionary[char].toString(); 
       }
     }
     else
       {
+        if (currentNumber === "0"){
+          currentNumber = "";
+        }
         currentNumber += numberDictionary[char].toString();
-        calcScreen.textContent = currentNumber;
       }
+
+      calcScreen.textContent = currentNumber;
   }
 }
+//delete a character
 const deleteChar = () => {
 
   if (currentNumber.length === 1){
@@ -172,9 +177,17 @@ const deleteChar = () => {
   }
   
 }
+//calculate the percentage of a number
 const percentage = () => {
   if (currentNumber !== ""){
     currentNumber = (parseFloat(currentNumber)/100).toString();
+    calcScreen.textContent = currentNumber;
+  }
+}
+//change the sign of a number
+const sign = () => {
+  if (currentNumber !== ""){
+    currentNumber = (parseFloat(currentNumber)*-1).toString();
     calcScreen.textContent = currentNumber;
   }
 }
@@ -188,7 +201,6 @@ keypad.addEventListener("click", function(event) {
     clear();
   }
   else if(target.classList.contains("operator")){
-    console.log("entering operator case");
     operator(target.id);
   }
   else if(target.id === "equals"){
@@ -199,5 +211,8 @@ keypad.addEventListener("click", function(event) {
   }
   else if(target.id === "percent"){
     percentage();
+  }
+  else if(target.id === "sign"){
+    sign();
   }
 })

@@ -41,13 +41,13 @@ body {
   margin-top: -34vh;
   background-color: var(--body-color);
   font-size: 30px;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
 }
 
 #calculator-screen {
   height: 10vh;
   width: 93%;
-  margin: 0.4em auto;
+  margin: 0.35em auto;
   display: flex;
   padding: 0 0.6rem;
   font-size: 3rem;
@@ -61,23 +61,24 @@ body {
   border-radius: 0.2em;
 }
 
+/*sign, div, mult, minus, addition*/
+
 .calculator-btns {
   height: 78%;
   width: 100%;
   display: grid;
   grid-template-areas: 
-  "ac del percent div"
-  "seven eight nine mult"
-  "four five six minus"
-  "one two three addition"
-  "point cero eq eq";
+  "ac del percent sign"
+  "seven eight nine div"
+  "four five six mult"
+  "one two three minus"
+  "cero point eq addition";
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 0.5em;
-  padding: 0.6em;
+  gap: 0.2em;
+  padding: 0.4em;
   padding-top: 0em;
 }
-
 .calculator-btn {
   background-color: #007bff;
   text-align: center;
@@ -89,7 +90,6 @@ body {
   cursor: pointer;
   border-radius: 4px;
 }
-
 #one {
   grid-area: one;
 }
@@ -152,4 +152,8 @@ body {
 #ac {
   grid-area: ac;
   background-color: var(--special-color);
+}
+
+#sign {
+  grid-area: sign;
 }
