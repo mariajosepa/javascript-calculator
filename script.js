@@ -6,18 +6,38 @@ let opCount = 0;
 let mem = null;
 
 const numberDictionary = {
-    zero: 0,
-    one: 1,
-    two: 2,
-    three: 3,
-    four: 4,
-    five: 5,
-    six: 6,
-    seven: 7,
-    eight: 8,
-    nine: 9,
-    point: ".",
-  }
+  zero: "0", 
+  one: "1", 
+  two: "2", 
+  three: "3", 
+  four: "4", 
+  five: "5", 
+  six: "6",
+  seven: "7", 
+  eight: "8", 
+  nine: "9", 
+  point: ".", 
+  "0": "0", 
+  "1": "1", 
+  "2": "2",
+  "3": "3", 
+  "4": "4", 
+  "5": "5", 
+  "6": "6", 
+  "7": "7", 
+  "8": "8", 
+  "9": "9",
+  ".": ".", 
+  "+": "addition", 
+  "-": "minus", 
+  "x": "multiply", 
+  "*": "multiply", 
+  "/": "divide"
+};
+
+const operators = ['+', '-', 'x', '/','*'];
+const functions = ['Backspace'];
+
 //know if we have a number in memory, and if so, we need to perform the operation with the stored number in mind
 const memSave = () => {
 
@@ -149,7 +169,7 @@ const typeChar = (char) => {
           {
             currentNumber += "0";
           }
-        currentNumber += numberDictionary[char].toString(); 
+        currentNumber += numberDictionary[char]; 
       }
     }
     else
@@ -157,7 +177,7 @@ const typeChar = (char) => {
         if (currentNumber === "0"){
           currentNumber = "";
         }
-        currentNumber += numberDictionary[char].toString();
+        currentNumber += numberDictionary[char];
       }
 
       calcScreen.textContent = currentNumber;
@@ -191,6 +211,23 @@ const sign = () => {
     calcScreen.textContent = currentNumber;
   }
 }
+// Function to handle keypress events
+function handleKeyPress(event) {
+  console.log(event.key);
+  if (event.key && event.key in numberDictionary) {
+    //operator case
+    if (operators.includes(event.key)) {
+      operator(numberDictionary[event.key]);
+    //delete
+    }else if (event.key === "Backspace"){
+      deleteChar();
+    }else{
+      typeChar(event.key);
+    }
+    
+  } 
+}
+
 keypad.addEventListener("click", function(event) {
   var target = event.target;
 
@@ -216,3 +253,5 @@ keypad.addEventListener("click", function(event) {
     sign();
   }
 })
+
+document.addEventListener("keydown", handleKeyPress);
