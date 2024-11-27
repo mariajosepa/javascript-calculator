@@ -32,7 +32,9 @@ const numberDictionary = {
   "-": "minus", 
   "x": "multiply", 
   "*": "multiply", 
-  "/": "divide"
+  "/": "divide",
+  "Backspace": "Backspace",
+  "=": "equals",
 };
 
 const operators = ['+', '-', 'x', '/','*'];
@@ -214,14 +216,18 @@ const sign = () => {
 // Function to handle keypress events
 function handleKeyPress(event) {
   console.log(event.key);
-  if (event.key && event.key in numberDictionary) {
+  if (event.key in numberDictionary) {
     //operator case
     if (operators.includes(event.key)) {
       operator(numberDictionary[event.key]);
     //delete
     }else if (event.key === "Backspace"){
       deleteChar();
-    }else{
+    //number
+    }else if(event.key === "="){
+      equals();
+    }
+    else{
       typeChar(event.key);
     }
     

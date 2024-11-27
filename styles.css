@@ -51,7 +51,7 @@ body {
   margin-left: -25vh;
   margin-top: -34vh;
   background-color: var(--body-color);
-  border-radius: 0.6rem;
+  border-radius: 5px;
 }
 
 #calculator-screen {
@@ -67,7 +67,7 @@ body {
   line-height: 10vh;
   text-align: right;
   flex-direction: row-reverse;
-  border-radius: 1%;
+  border-radius: 3px;
   font-size: 7.2vh;
 }
 
